@@ -1,16 +1,39 @@
 package Algorithm;
 
-public class MergeSort {
+public class Coupon {
 
     public static void main(String[] args) {
-        int[] arr = {8, 3, 1, 5, 2, 7, 6, 4};
-        mergeSort(arr, 0, arr.length - 1);
-        for (int a : arr) {
-            System.out.print(a + " ");
+
+        int[] price = {30000, 2000, 1500000};
+        int[] coupon = {20, 40};
+
+        int priceIndex = 0;
+        int result = 0;
+
+        mergeSort(price, 0, price.length - 1);
+        mergeSort(coupon, 0, coupon.length - 1);
+
+        for (int i = 0; i < coupon.length; i++) {
+            int tmpPrice = price[priceIndex];
+            int tmpCoupon = coupon[i];
+
+            result += tmpPrice * (100 - tmpCoupon) / 100;
+            priceIndex++;
         }
+
+        if (price.length > priceIndex) {
+            for (int i = priceIndex; i < price.length; i++) {
+                result += price[i];
+            }
+        }
+
+        System.out.println(result);
+
+
     }
 
     public static void mergeSort(int[] arr, int left, int right) {
+
         if (left >= right) {
             return;
         }
@@ -20,6 +43,7 @@ public class MergeSort {
         mergeSort(arr, left, mid);
         mergeSort(arr, mid + 1, right);
         merge(arr, left, mid, right);
+
     }
 
     public static void merge(int[] arr, int left, int mid, int right) {
@@ -41,13 +65,14 @@ public class MergeSort {
             j++;
         }
 
-        // 병합 단계
+        // 병합 단계 (내림차순으로 변경)
         int leftIndex = 0;
         int rightIndex = 0;
         int mergedIndex = left;
 
         while (leftIndex < leftSize && rightIndex < rightSize) {
-            if (leftArr[leftIndex] <= rightArr[rightIndex]) {
+            // 🔽 여기 비교 조건만 반대로 바뀜!
+            if (leftArr[leftIndex] >= rightArr[rightIndex]) {
                 arr[mergedIndex] = leftArr[leftIndex];
                 leftIndex++;
             } else {
@@ -72,5 +97,5 @@ public class MergeSort {
         }
     }
 
-}
 
+}

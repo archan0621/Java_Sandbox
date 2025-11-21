@@ -5,7 +5,7 @@ public class Fibonachi {
 
         Fibo instance = new Fibo();
 
-        System.out.println(instance.fibo(8));
+        System.out.println(instance.fibo(20));
     }
 }
 
